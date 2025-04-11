@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
             res,
             status: 200,
             message: "Login successful",
-            data: user,
+            data: {...user.user},
             error: null
         });
     } catch (error) {
