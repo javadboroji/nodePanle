@@ -22,5 +22,14 @@ postRouter.post(
     postController.createPost(req, res);
   }
 );
-postRouter.post("/getAllPosts",authenticateToken,(req:Request,res:Response)=>{postController.getAllPosts(req,res)})
+postRouter.post(
+  "/getAllPosts",
+  authenticateToken,
+  (req: Request, res: Response) => {
+    postController.getAllPosts(req, res);
+  }
+);
+postRouter.post("/updatePost", (req: Request, res: Response) => {
+  postController.updatePost(req, res);
+});
 export default postRouter;

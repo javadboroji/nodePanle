@@ -11,6 +11,8 @@ class baseService {
         return await this.Model.findAll();
     }
 
+   /*=========================================== Get With Pagnation and Search ===========================================*/
+   
     
     async getAllWithSearch(search: string, page: number = 1, size: number = 10, columns: string[]) {
         const offset = (page - 1) * size;
@@ -34,17 +36,34 @@ class baseService {
         //* return data with pagination
         return { data, totalDatas, totalPages, currentPage: page };
     }
+
+  /*=========================================== Get By ID ===========================================*/
+  
+    
     async getById(id: number) {
         return await this.Model.findByPk(id);
     }
+
+
+  /*=========================================== Create ===========================================*/
+  
+    
     async create(data: any) {
         return await this.Model.create(data);
     }
+
+    /*=========================================== Update ===========================================*/
+    
+    
     async update(id: number, data: any) {
         const record = await this.Model.findByPk(id);
         if (!record) return null;
         return await record.update(data);
     }
+
+    /*=========================================== Delete ===========================================*/
+    
+    
     async delete(id: number) {
         const record = await this.Model.findByPk(id);
         if (!record) return null;

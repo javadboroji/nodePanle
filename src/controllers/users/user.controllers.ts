@@ -11,8 +11,10 @@ class UserController extends baseService {
     super(User);
   }
   async getAllUsers(req: Request, res: Response) {
+    const{ searchTerm, page, pageSize }= req.body;
+    const columns = ["name"];
     try {
-      const users = await this.getAll();
+      const users = await this.getAllWithSearch( searchTerm, page, pageSize,columns);
 
       if (!users) {
         return responseHelper({
