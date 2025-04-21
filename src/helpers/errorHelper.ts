@@ -1,41 +1,48 @@
 import { Response, response } from "express";
+interface IErrorHelper{
+  res:Response
+  errorStatus: 500 | 400 | 401 | 403 | 404 | 422 | 503
+  errorMessage: string
 
-type TerrorHelper = 500 | 400 | 401 | 403 | 404 | 422 | 503;
+}
+
 class errorHelper {
   constructor() {}
-  getError(res:Response ,errorStatus: TerrorHelper , errorMessage: string) {
-    switch (errorStatus) {
+
+  
+  getError(arg:IErrorHelper) {
+    switch (arg.errorStatus) {
       case 500:
         return {
-          res: res,
+          res: arg.res,
           status: 500,
-          message: errorMessage,
+          message: arg.errorMessage,
           data: null,
-          error: errorMessage,
+          error: arg.errorMessage,
         };
       case 400:
         return {
-          res: res,
+          res: arg.res,
           status: 400,
-          message: errorMessage,
+          message: arg.errorMessage,
           data: null,
-          error: errorMessage,
+          error: arg.errorMessage,
         };
       case 404:
         return {
-          res: res,
+          res: arg.res,
           status: 404,
-          message: errorMessage,
+          message:  arg.errorMessage,
           data: null,
-          error: errorMessage,
+          error:  arg.errorMessage,
         };
       default:
         return {
-          res: res,
+          res: arg.res,
           status: 500,
-          message: errorMessage,
+          message:  arg.errorMessage,
           data: null,
-          error: errorMessage,
+          error:  arg.errorMessage,
         };
     }
   }

@@ -24,15 +24,12 @@ class PostController extends baseService {
         columns
       );
       if (!posts) {
-        return responseHelper({
-          res,
-          status: 404,
-          message: "No posts found",
-          data: null,
-          error: null,
-        });
+        return responseHelper(errorResponse.getError({
+          res: res,
+          errorStatus: 404,
+          errorMessage: "Not Found",
+        }));
       }
-      console.log(posts, "****posts****");
 
       return responseHelper({
         res,
@@ -46,7 +43,11 @@ class PostController extends baseService {
       });
     } catch (error) {
       return responseHelper(
-        errorResponse.getError(res, 500, "Internal server error")
+        errorResponse.getError({
+          res: res,
+          errorStatus: 500,
+          errorMessage: "Internal server error",
+        })
       );
     }
   }
@@ -59,13 +60,11 @@ class PostController extends baseService {
       const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 
       if (!title || !content || !category_id) {
-        return responseHelper({
-          res,
-          status: 400,
-          message: "All fields are required",
-          data: null,
-          error: null,
-        });
+        return responseHelper(errorResponse.getError({
+          res: res,
+          errorStatus: 400,
+          errorMessage: "title || !content || category_id  Is Required",
+        }));
       }
 
       const newPost = await this.create({
@@ -85,7 +84,11 @@ class PostController extends baseService {
       });
     } catch (error) {
       return responseHelper(
-        errorResponse.getError(res, 500, "Internal server error")
+        errorResponse.getError({
+          res: res,
+          errorStatus: 500,
+          errorMessage: "Internal server error",
+        })
       );
     }
   }
@@ -132,7 +135,11 @@ class PostController extends baseService {
       });
     } catch (error) {
       return responseHelper(
-        errorResponse.getError(res, 500, "Internal server error")
+        errorResponse.getError({
+          res: res,
+          errorStatus: 500,
+          errorMessage: "Internal server error",
+        })
       );
     }
   }

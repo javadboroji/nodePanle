@@ -1,53 +1,33 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "My Express API",
-      "description": "API documentation for my Express app",
-      "version": "1.0.0"
-    },
-    "host": "localhost:8080",
-    "basePath": "/",
-    "schemes": [
-      "http"
-    ],
-    "paths": {
-      "/api/getAllUsers": {
-        "get": {
-          "description": "",
-          "responses": {
-            "default": {
-              "description": ""
-            }
-          }
-        }
-      },
-      "/api/getUser/{id}": {
-        "get": {
-          "description": "",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": ""
-            }
-          }
-        }
-      },
-      "/api/register": {
-        "post": {
-          "description": "",
-          "responses": {
-            "default": {
-              "description": ""
-            }
-          }
-        }
-      }
+  "swagger": "2.0",
+  "info": {
+    "title": "Panle API",
+    "description": "API Documentation for Panle",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints"
     }
-  }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {}
+}
