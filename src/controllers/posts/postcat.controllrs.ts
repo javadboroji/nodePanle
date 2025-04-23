@@ -30,7 +30,9 @@ const errorResponse = new errorHelper();
       });
     } catch (error) {
       return responseHelper(
-        errorResponse.getError(res, 500, "Internal server error")
+        errorResponse.getError({
+          res, errorStatus:500, errorMessage:"Internal server error"
+        })
       );
     }
   }

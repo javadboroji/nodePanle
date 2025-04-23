@@ -11,10 +11,15 @@ class UserController extends baseService {
     super(User);
   }
   async getAllUsers(req: Request, res: Response) {
-    const{ searchTerm, page, pageSize }= req.body;
+    const { searchTerm, page, pageSize } = req.body;
     const columns = ["name"];
     try {
-      const users = await this.getAllWithSearch( searchTerm, page, pageSize,columns);
+      const users = await this.getAllWithSearch(
+        searchTerm,
+        page,
+        pageSize,
+        columns
+      );
 
       if (!users) {
         return responseHelper({
@@ -34,7 +39,11 @@ class UserController extends baseService {
       });
     } catch (error) {
       return responseHelper(
-        errorResponse.getError(res, 500, "Internal server error")
+        errorResponse.getError({
+          res,
+          errorStatus: 500,
+          errorMessage: "Internal server error",
+        })
       );
     }
   }

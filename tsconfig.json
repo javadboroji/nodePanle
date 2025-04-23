@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "declaration": true,  // حتما این رو اضافه کن
+    "emitDeclarationOnly": true, // برای تولید فقط فایل‌های declaration
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "strict": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true  // اگر نیاز به JSON داری، این رو فعال کن
   },
+  "ts-node": {
+    "esm": true
+  },
+  "type": "module",
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
