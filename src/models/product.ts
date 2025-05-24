@@ -2,20 +2,19 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../database/possqlDB.ts";
 
 
-class product extends Model{
+class Product extends Model{
     public id!: number;
     public name!: string;
     public price!: number;
     public description!: string;
     public image!: string;
-    public categoryId!: number; 
+    public category_id!: number; 
 
 }
 
-product.init({
+Product.init({
     id: {
         type: DataTypes.UUID,
-        autoIncrement: true,
         primaryKey: true,
     },
     title: {
@@ -46,10 +45,16 @@ product.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    // categoryId: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,       
-    // }
+    category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'categories',
+            key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',       
+    }
 
     },
     {
@@ -61,4 +66,4 @@ product.init({
               
     }
 );
-export default product;
+export default Product;
