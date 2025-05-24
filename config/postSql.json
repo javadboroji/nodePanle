@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Pp123456!",
+    "database": "ecommerce",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": "",
+    "database": "panle_db_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "Pp123456!",
+    "database": "ecommerce",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres"
+  }
+} 

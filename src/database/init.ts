@@ -1,4 +1,4 @@
-import sequelize from "./db.js";
+import sequelize from "./db.ts";
 async function initDB () {
     try {
         await sequelize.authenticate();
