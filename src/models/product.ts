@@ -18,7 +18,7 @@ product.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    title: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -26,18 +26,30 @@ product.init({
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    sku: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
     description: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    image: {
+    image_url: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    categoryId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,       
-    }
+    // categoryId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,       
+    // }
 
     },
     {
@@ -48,4 +60,5 @@ product.init({
             updatedAt: 'updated_at',
               
     }
-)
+);
+export default product;
