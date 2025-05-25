@@ -38,14 +38,14 @@ class ProductsController extends baseService {
                     error: null,
                 }
             )
-        } catch (error) {
+        } catch (error:any) {
             console.log(error ,'error*********************');
             
             return responseHelper(
                 errorResponse.getError({
                   res,
                   errorStatus: 500,
-                  errorMessage: "Internal server error",
+                  errorMessage: error?.message || String(error),
                 })
               );
         }

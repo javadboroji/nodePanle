@@ -1,15 +1,19 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../database/possqlDB.ts";
+import sequelize from "../database/db.ts";
 
 
 class Product extends Model{
     public id!: number;
-    public name!: string;
+    public title!: string;
     public price!: number;
     public description!: string;
-    public image!: string;
-    public category_id!: number; 
-
+    public image_url!: string;
+    public count!: number;
+    public sku!: string;
+    public is_active!: boolean;
+    //public category_id: number; 
+    // public createdAt!: Date;
+    // public updatedAt!: Date;
 }
 
 Product.init({
@@ -45,25 +49,23 @@ Product.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    category_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'categories',
-            key: 'id',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'SET NULL',       
-    }
+    // category_id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: true,
+    //     references: {
+    //         model: 'categories',
+    //         key: 'id',
+    //       },
+    //       onUpdate: 'CASCADE',
+    //       onDelete: 'SET NULL',       
+    // }
 
     },
+    
     {
         sequelize,
-        tableName: "products",
+                tableName: "products",
             timestamps: true,  
-            createdAt: 'created_at', 
-            updatedAt: 'updated_at',
-              
     }
 );
 export default Product;

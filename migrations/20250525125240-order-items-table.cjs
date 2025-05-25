@@ -3,27 +3,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    queryInterface.createTable('orders', {
+    await queryInterface.createTable('order_items', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        autoIncrement: true
       },
-      user_id: {
+      order_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'orders',
+          key: 'id'
+        },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        allowNull: false
+      },
+      product_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'products',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      status: {
+      price_at_purchase: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'order_statuses', 
-          key: 'id'
-        },
-        allowNull: false,
-         onUpdate: 'CASCADE',
-        onDelete: 'RESTRICT'
-
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -35,10 +48,10 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    })
+    });
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('orders');
+    await queryInterface.dropTable('order_items');
   }
 };

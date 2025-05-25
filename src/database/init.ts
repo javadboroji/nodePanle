@@ -4,7 +4,7 @@ async function initDB () {
         await sequelize.authenticate();
         console.log("✅ Database connected successfully.");
     
-        await sequelize.sync(); 
+        await sequelize.sync({force: false, alter: false}); 
         console.log("✅ All models were synchronized.");
       } catch (error) {
         console.log(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD );
