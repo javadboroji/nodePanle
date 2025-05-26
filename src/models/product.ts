@@ -49,16 +49,16 @@ Product.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    // category_id: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: true,
-    //     references: {
-    //         model: 'categories',
-    //         key: 'id',
-    //       },
-    //       onUpdate: 'CASCADE',
-    //       onDelete: 'SET NULL',       
-    // }
+    category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'categories',
+            key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',       
+    }
 
     },
     
