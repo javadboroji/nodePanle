@@ -64,8 +64,8 @@ class AuthService<T extends Model> {
       { expiresIn: "1h" }
     );
     const userData = user.toJSON();
-
-    return { user: { ...userData, token } as unknown as T, error: null };
+      const {id ,name , emial ,role ,status}=userData
+    return { user: {id, name ,emial ,role ,status, token } as unknown as T, error: null };
   }
   /**=======================
    * Check if user exists

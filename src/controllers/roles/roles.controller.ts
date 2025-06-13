@@ -10,6 +10,7 @@ class RolesController extends baseService {
   constructor() {
     super(roles);
   }
+    //******************************************  GetAll Roles With Pagnation    ******************************************************** */
 
   async getRolesWithPagnation(req: Request, res: Response) {
     const { searchTerm, page, pageSize } = req.body;
@@ -23,7 +24,7 @@ class RolesController extends baseService {
       );
 
       if (!roles) {
-        return missingFields(res,[""] ,req.body);
+        return missingFields(res, [""], req.body);
       }
       return responseHelper({
         res,
@@ -42,6 +43,36 @@ class RolesController extends baseService {
       );
     }
   }
+    //******************************************  GetAll Roles    ******************************************************** */
 
+  async getAllRoles(req: Request, res: Response) {
+    try {
+      const roles = await this.getAll();
+      if (!roles) {
+        return responseHelper({
+          res,
+          status: 404,
+          message: "No roles found",
+          data: null,
+          error: null,
+        });
+      }
+      return responseHelper({
+        res,
+        status: 200,
+        message: "roles found",
+        data: roles,
+        error: null,
+      });
+    } catch (error: any) {
+      return responseHelper(
+        errorResponse.getError({
+          res,
+          errorStatus: 500,
+          errorMessage: error?.message || String(error),
+        })
+      );
+    }
+  }
 }
-export default RolesController
+export default RolesController;
