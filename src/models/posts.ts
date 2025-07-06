@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../database/db.js";
 
-class post extends Model{
+class post extends Model {
     public id!: number;
     public title!: string;
     public content!: string;
@@ -20,7 +20,7 @@ post.init({
         primaryKey: true,
     },
     title: {
-        type: DataTypes.STRING      ,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     content: {
@@ -30,10 +30,22 @@ post.init({
     category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'categories',
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
     },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'RESTRICT',
     },
     image_url: {
         type: DataTypes.STRING,
@@ -54,9 +66,9 @@ post.init({
 }, {
     sequelize,
     tableName: "posts",
-    timestamps: true,  
-    createdAt: 'created_at', 
+    timestamps: true,
+    createdAt: 'created_at',
     updatedAt: 'updated_at',
-})      
+})
 
 export default post;

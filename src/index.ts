@@ -1,13 +1,14 @@
 import('dotenv/config');
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 import express from 'express';
 import cors from 'cors';
 import initDB from './database/init.ts';
 import dotenv from 'dotenv';
 import router from './routes/api/index.ts';
  import swaggerUi from 'swagger-ui-express';
-const swaggerFile = await import('./docs/swagger-output.json', {
-  assert: { type: 'json' }
-});
+const swaggerFile = require('./docs/swagger-output.json');
+
 try {
     dotenv.config();
     const app = express();
