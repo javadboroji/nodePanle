@@ -22,18 +22,20 @@ class AuthService<T extends Model> {
   async register(
     data: Partial<T["_attributes"]>
   ): Promise<{ user: T | null; error: any }> {
+
     if (!data) return { user: null, error: "Data is required" };
     //check if user already exists
+
     const existsUser = await this.model.findOne({
       where: { email: data.email },
     });
+
     if (existsUser) return { user: null, error: "User already exists" };
 
     const newUser = {
       ...data,
       createdAt: new Date(),
       status: true,
-      role: 2,
     };
     const user = await this.model.create(newUser as any);
     return { user, error: null };
@@ -44,8 +46,18 @@ class AuthService<T extends Model> {
   async login(
     data: Partial<T["_attributes"]>
   ): Promise<{ user: T | null; error: any }> {
-    if (!data) return { user: null, error: "Data is required" };
+
+    if (!data) return { 
+      user: null, 
+      error: "Data is required" 
+    };
+
+
+
+
     const user = await this.model.findOne({ where: { email: data.email } });
+
+    
     if (!user) return { user: null, error: "User not found" };
 
     const isMatch = await bcrypt.compare(

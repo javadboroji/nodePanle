@@ -4,6 +4,8 @@ import User from "../../models/users.js";
 import responseHelper from "../../helpers/responseHelper.js";
 import errorHelper from "../../helpers/errorHelper.js";
 import hashPassword from "../../helpers/hashPassword.js";
+import { serialize } from "cookie";
+import { userInfoLogin } from "../../types/auth/index.js";
 //Service Call
 const authService = new AuthService(User);
 //Error Helper
@@ -11,7 +13,7 @@ const errorResponse = new errorHelper();
 //Controller
 export const register = async (req: Request, res: Response) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, name ,role } = req.body;
 
     if (!email || !password || !name)
       return responseHelper({
@@ -29,6 +31,7 @@ export const register = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       name,
+      role
     });
 
     if (!user.user)
@@ -59,6 +62,7 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 export const login = async (req: Request, res: Response) => {
+
   try {
     const { email, password } = req.body;
     if (!email || !password)
@@ -84,11 +88,13 @@ export const login = async (req: Request, res: Response) => {
         data: null,
       });
     //send response
+    //save token in cookie
+    const findUser = user.user as unknown as userInfoLogin;
     return responseHelper({
       res,
       status: 200,
       message: "Login successful",
-      data: { ...user.user },
+      data: findUser,
       error: null,
     });
   } catch (error) {
